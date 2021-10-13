@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 interface BookData {
   id: string;
@@ -14,21 +14,10 @@ interface Props {
 
 function Book({ book }: Props) {
   return (
-    <div
-      key={book.id}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-        margin: 10,
-        padding: 10,
-        width: 200,
-        // background: 'red'
-      }}>
-      <img src={book.img_url} alt="book" style={{ width: 100, marginBottom: 5 }} />
+    <Container key={book.id}>
+      <img src={book.img_url} alt="Book cover" />
       <span>{book.titulo}</span>
-    </div>
+    </Container>
   );
 }
 
