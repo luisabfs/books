@@ -1,8 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react';
+import Book from './components/Book'
 import booksAPI from './services/books';
 
 const App = () => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [books, setBooks] = useState([]);
 
   const handleSubmit = useCallback(
@@ -10,7 +11,7 @@ const App = () => {
       e.preventDefault();
 
       const { data } = await booksAPI.get(
-        `/v1?q=${inputRef.current.value}&limit=40`,
+        `/v1?q=${inputRef.current?.value}&limit=40`,
       );
       setBooks(data.results);
     },
@@ -26,22 +27,12 @@ const App = () => {
 
       <div
         style={{
-          display: 'flex',
           flex: 1,
+          display: 'flex',
           flexWrap: 'wrap',
         }}>
         {books.map((book) => (
-          <div
-            key={book.id}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              margin: 20,
-              width: 200,
-            }}>
-            <img src={book.img_url} alt="book" style={{ width: 100 }} />
-            <span>{book.titulo}</span>
-          </div>
+         <Book book={book} />
         ))}
       </div>
     </div>
